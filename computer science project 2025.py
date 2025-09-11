@@ -224,7 +224,6 @@ def apps():
 
     
 
-
     for i in appslist:
         if len(i)>len(e):
             e=i
@@ -241,7 +240,7 @@ def apps():
 
         tapps.append(entry)
     def appsfunc():
-        global appsorder,tapps,final
+        global appsorder,tapps,final,entreesorder,dessertsorder
         appsorder=[]
         for i in tapps:
             appsorder.append(i.get())
@@ -255,7 +254,6 @@ def apps():
                 final.append(entreeslist[i] + ", " + entreesorder[i])
 
         for i in range(len(dessertslist)):
-            global dessertsorder
             if i<len(dessertsorder) and dessertsorder[i] != "0":
                 final.append(dessertslist[i] + ", " + dessertsorder[i])
 
@@ -320,8 +318,8 @@ def entrees():
         t.append(entry)
 
     def entreesfunc():
-        global entreesorder
-        entreeorder=[]
+        global entreesorder, appsorder, dessertsorder
+        entreesorder=[]
         for i in t:
             entreesorder.append(i.get())
 
@@ -335,7 +333,6 @@ def entrees():
                 final.append(entreeslist[i] + ", " + entreesorder[i])
 
         for i in range(len(dessertslist)):
-            global dessertsorder
             if i<len(dessertsorder) and dessertsorder[i] != "0":
                 final.append(dessertslist[i] + ", " + dessertsorder[i])
 
@@ -403,7 +400,7 @@ def desserts():
         t.append(entry)
 
     def dessertsfunc():
-        global dessertsorder
+        global dessertsorder, appsorder, entreesorder
         dessertsorder=[]
         for i in t:
             dessertsorder.append(i.get())
@@ -418,7 +415,6 @@ def desserts():
                 final.append(entreeslist[i] + ", " + entreesorder[i])
 
         for i in range(len(dessertslist)):
-            dessertsorder
             if i<len(dessertsorder) and dessertsorder[i] != "0":
                 final.append(dessertslist[i] + ", " + dessertsorder[i])
 
@@ -426,7 +422,7 @@ def desserts():
         s=''
         for i in final:
             s=s+'\n'+i
-        ordertext=tk.Label(appswind,text=s,bg='black',fg='white',font=(12))
+        ordertext=tk.Label(dessertswind,text=s,bg='black',fg='white',font=(12))
         ordertext.place(x=800,y=0)
         
     Submit = tk.Button(dessertswind, text='Submit', font=('Arial', 14), fg='black', bg='#E16C2E', command=dessertsfunc)
@@ -451,9 +447,3 @@ def desserts():
     global finalwind
     Finalise=tk.Button(dessertswind,text='Finalise order',font=('Arial', 12), fg='black', bg='#E16C2E', command=lambda: [dessertswind.withdraw(), finaliseorder()])
     Finalise.place(x=300,y=20*(len(dessertslist)+6))
-
-
-
-
-
-
