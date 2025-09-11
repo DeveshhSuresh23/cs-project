@@ -247,8 +247,8 @@ def apps():
     tapps = []
     e=''
 
-    
-
+    beware=tk.Label(appswind,text='do check order before finalising',bg='black',fg='white',font='10')
+    beware.place(x=800,y=600)
 
     for i in appslist:
         if len(i)>len(e):
@@ -290,8 +290,6 @@ def apps():
             s=s+'\n'+i
         ordertext=tk.Label(appswind,text=s,bg='black',fg='white',font=(12))
         ordertext.place(x=800,y=0)
-    beware=tk.Label(appswind,text='do check order before finalising',bg='black',fg='white',font='10')
-    beware.place(x=800,y=600)
     Submit = tk.Button(appswind, text='Submit', font=('Arial', 14), fg='black', bg='#E16C2E', command=appsfunc)
     Submit.place(x=0, y=20*(len(appslist) + 3))
 
@@ -478,6 +476,7 @@ def desserts():
     global finalwind
     Finalise=tk.Button(dessertswind,text='see order',font=('Arial', 12), fg='black', bg='#E16C2E', command=lambda: [dessertswind.withdraw(), finaliseorder()])
     Finalise.place(x=300,y=20*(len(dessertslist)+6))
+
 
 
 
