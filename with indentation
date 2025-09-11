@@ -1,0 +1,164 @@
+import tkinter as tk   # Import tkinter for GUI
+from tkinter import messagebox   # For showing popup messages
+
+# ---------------------------
+# MAIN WINDOW (login screen)
+# ---------------------------
+root = tk.Tk()
+root.title("Restaurant Ordering System")   # Window title
+root.geometry("400x400")   # Set window size
+
+# ---------------------------
+# STAFF LOGIN FUNCTION
+# ---------------------------
+def staff():
+    # Create new window for staff login
+    staffwind = tk.Toplevel(root)
+    staffwind.title("Staff Login")
+    staffwind.geometry("400x400")
+    
+    # Label asking for password
+    staffpass = tk.Label(staffwind, text="Enter Staff Password:", font=(30))
+    staffpass.pack(pady=10)
+    
+    # Entry box for password (input hidden using show="*")
+    staffentry = tk.Entry(staffwind, show="*")
+    staffentry.pack(pady=5)
+    
+    # Function that checks password when login button is clicked
+    def check_staff_password():
+        password = staffentry.get()   # Get input text
+        if password == "1234":   # ✅ Correct password
+            messagebox.showinfo("Access Granted", "Welcome Staff!")
+            staffwind.destroy()   # Close staff login window
+            staffmenu()   # Open staff menu
+        else:
+            messagebox.showerror("Access Denied", "Incorrect Password")  # ❌ Wrong password
+    
+    # Login button (runs check_staff_password)
+    staffbut = tk.Button(staffwind, text="Login", command=check_staff_password)
+    staffbut.pack(pady=10)
+
+# ---------------------------
+# STAFF MENU FUNCTION
+# ---------------------------
+def staffmenu():
+    # Create new staff menu window
+    staffmenwind = tk.Toplevel(root)
+    staffmenwind.title("Staff Menu")
+    staffmenwind.geometry("400x400")
+    
+    # Label at top of staff menu
+    stafflabel = tk.Label(staffmenwind, text="Staff Menu", font=(30))
+    stafflabel.pack(pady=20)
+    
+    # Example buttons for staff actions
+    additem = tk.Button(staffmenwind, text="Add Item", font=(20))
+    additem.pack(pady=5)
+    
+    vieworders = tk.Button(staffmenwind, text="View Orders", font=(20))
+    vieworders.pack(pady=5)
+
+# ---------------------------
+# GUEST FUNCTION (MENU ENTRY POINT)
+# ---------------------------
+def guest():
+    # Create new window for guests
+    guestwind = tk.Toplevel(root)
+    guestwind.title("Guest")
+    guestwind.geometry("400x400")
+    
+    # Buttons for different food categories
+    apps = tk.Button(guestwind, text="Appetizers", command=appetizers, font=(20))
+    apps.pack(pady=10)
+    
+    entre = tk.Button(guestwind, text="Entrees", command=entrees, font=(20))
+    entre.pack(pady=10)
+    
+    dessert = tk.Button(guestwind, text="Desserts", command=desserts, font=(20))
+    dessert.pack(pady=10)
+
+# ---------------------------
+# APPETIZERS MENU
+# ---------------------------
+def appetizers():
+    # New window for appetizers
+    appswind = tk.Toplevel(root)
+    appswind.title("Appetizers")
+    appswind.geometry("400x400")
+    
+    # Label
+    appslabel = tk.Label(appswind, text="Select Appetizer", font=(30))
+    appslabel.pack(pady=20)
+    
+    # Example items
+    fries = tk.Button(appswind, text="Fries", command=lambda: addorder("Fries"), font=(20))
+    fries.pack(pady=5)
+    
+    wings = tk.Button(appswind, text="Wings", command=lambda: addorder("Wings"), font=(20))
+    wings.pack(pady=5)
+
+# ---------------------------
+# ENTREES MENU
+# ---------------------------
+def entrees():
+    # New window for entrees
+    entrewind = tk.Toplevel(root)
+    entrewind.title("Entrees")
+    entrewind.geometry("400x400")
+    
+    # Label
+    entrelabel = tk.Label(entrewind, text="Select Entree", font=(30))
+    entrelabel.pack(pady=20)
+    
+    # Example items
+    burger = tk.Button(entrewind, text="Burger", command=lambda: addorder("Burger"), font=(20))
+    burger.pack(pady=5)
+    
+    pizza = tk.Button(entrewind, text="Pizza", command=lambda: addorder("Pizza"), font=(20))
+    pizza.pack(pady=5)
+
+# ---------------------------
+# DESSERTS MENU
+# ---------------------------
+def desserts():
+    # New window for desserts
+    dessertwind = tk.Toplevel(root)
+    dessertwind.title("Desserts")
+    dessertwind.geometry("400x400")
+    
+    # Label
+    dessertlabel = tk.Label(dessertwind, text="Select Dessert", font=(30))
+    dessertlabel.pack(pady=20)
+    
+    # Example items
+    icecream = tk.Button(dessertwind, text="Ice Cream", command=lambda: addorder("Ice Cream"), font=(20))
+    icecream.pack(pady=5)
+    
+    cake = tk.Button(dessertwind, text="Cake", command=lambda: addorder("Cake"), font=(20))
+    cake.pack(pady=5)
+
+# ---------------------------
+# ADD ORDER FUNCTION
+# ---------------------------
+def addorder(item):
+    # This function adds the selected item to the "order list"
+    # Right now, it just shows a message that item was added
+    messagebox.showinfo("Order Added", f"{item} has been added to your order.")
+
+# ---------------------------
+# MAIN LOGIN SCREEN BUTTONS
+# ---------------------------
+
+# Staff button (opens staff login window)
+staff = tk.Button(root, text="Click if Staff", font=(30), fg="black", bg="#E16C2E", command=staff)
+staff.place(x=50, y=100)
+
+# Guest button (opens guest menu window)
+guest = tk.Button(root, text="Click if Guest", font=(30), fg="black", bg="#E16C2E", command=guest)
+guest.place(x=200, y=100)
+
+# ---------------------------
+# RUN THE APPLICATION
+# ---------------------------
+root.mainloop()
