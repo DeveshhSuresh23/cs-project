@@ -8,16 +8,12 @@ root.geometry('1500x600')
 root.configure(bg='black')
 s=''
 i=tk.IntVar()
-# a control variable that is something that hold a integer has been created
 i.set(3)
-#i am setting its value to 3
 final=[]
 appsorder=[]
 entreesorder=[]
 dessertsorder=[]
-#***********************
 #sorting if member or not
-#defining functions
 def showmenu():
     if i.get()!=3:
         global wind2
@@ -131,31 +127,13 @@ def howto():
     howwind1=tk.Toplevel(root)
     howwind1.geometry('1500x900')
     howwind1.configure(bg='black')
-    h=tk.Label(howwind1,text="""```
-To use the LEXMI NICOS menu application as a guest, follow these instructions:
-
-1.  **Starting the Application**: When the main window appears, click on the "click if guest" button.
-2.  **Membership Selection**: A new window will pop up. If you are a member, select "member". Otherwise, choose "not a member".
-3.  **Accessing the Menu**:
-    * **If you selected "not a member"**: Click "SUBMIT". You will be taken directly to the main "LEXMI NICOS" menu.
-    * **If you selected "member"**: Enter any text for "name" and "passcode", then click "Login". This will also take you to the main "LEXMI NICOS" menu.
-4.  **Browse Categories**: On the main "LEXMI NICOS" menu, you can click on "Appetizers", "Entrees", or "Desserts" to view items within each category.
-5.  **Selecting Items and Quantities**:
-    * Once you are on a category screen (Appetizers, Entrees, or Desserts), you will see a list of items.
-    * Next to each item, there is an input box. Enter the desired quantity (a whole number) for the item you wish to order.
-    * If you do not want an item, leave its input box as '0' or empty.
-6.  **Saving Your Selections (Crucial Step!)**: After entering quantities for items in a category, **you MUST click the "Submit" button** (located at the top-left) to save your selections for that category. Failing to click "Submit" will result in your selections not being added to your order.
-7.  **Navigating Between Categories**: Use the "Go to Appetizers", "Go to Entrees", or "Go to Desserts" buttons on any category screen to switch between categories. Remember to "Submit" your changes before moving to another category.
-8.  **Returning to the Main Menu**: At any point, you can click the "Back to Menu" button to return to the main "LEXMI NICOS" menu.
-9.  **Finalizing Your Order**: Once you have made all your selections across all desired categories and clicked "Submit" for each, click the "see order" button (available on any category screen). This will take you to the "FINAL ORDER" screen, where you can review your complete order.
-10. **Modifying Your Order**: If you need to make changes after reviewing your final order, use the "Go to" buttons on the "FINAL ORDER" screen to navigate back to the specific category, adjust quantities, click "Submit" again, and then return to "FINAL ORDER" by clicking "see order" again. You can also click the "Refresh" button on the "FINAL ORDER" screen to update the displayed order after making changes in a category.
-11. **Exiting the Application**: To close the application, simply close the main "MENU" window using its 'X' button. This will close all associated windows.
-
-**Important Notes**:
-* Always click "Submit" after entering quantities for items in a category.
-* Only use whole numbers for quantities.
-* This version of the application does not calculate prices.
-```.""",font=(25),fg='#E16C2E',bg='black')
+    h=tk.Label(howwind1,text="""If you're a member, select "Member" and enter any text for Name and Passcode, then click "Login"; otherwise, choose "Not a member" and click "SUB\n
+MIT" to reach the main "LEXMI NICOS" menu. Here, you can click "Appetizers," "Entrees," or "Desserts" to browse categories. On any category screen, enter the desired quantity (number\n
+) next to each item in the input box (leave as '0' or empty for unwanted items). Crucially, click "Submit" at the top-left to save your selections before navigating to other categor\n
+ies using the "Go to" buttons. You can return to the main menu at any time with "Back to Menu." Once all selections are made, click "Finalise Order" from any category screen to review
+\nyour complete order. If changes are needed, use the "Go to" buttons to return to a category, adjust quantities (remembering to "Submit" again), and then re-finalize your order.\n
+To exit, simply close the main "MENU" window using its 'X' button, which will close all associated windows. For smooth usage, always click "Submit" after entering quantities, \n
+use only whole numbers, and note that this version does not calculate prices.""",font=(25),fg='#E16C2E',bg='black')
     h.pack()
 
     back=tk.Button(howwind1,text='BACK',font=(50),width=40,bg='#E16C2E',fg='black',command=lambda:[howwind1.destroy(),wind2.deiconify()])
@@ -192,9 +170,6 @@ def finaliseorder():
     finalwind.title('FINAL ORDER')
     finalwind.geometry('1500x900')
     finalwind.configure(bg='black')
-
-    refresh=tk.Button(finalwind, text='Refresh',font=('Arial', 12), fg='black', bg='#E16C2E', command=lambda:[finalwind.destroy(),finaliseorder()])
-    refresh.place(x=500, y=20 * (len(dessertslist) + 8))
 
     title_label = tk.Label(finalwind, text="YOUR ORDER", font=('ELEPHANT', 20), fg='#E16C2E', bg='black')
     title_label.place(x=600, y=20)
@@ -247,8 +222,8 @@ def apps():
     tapps = []
     e=''
 
-    beware=tk.Label(appswind,text='do check order before finalising',bg='black',fg='white',font='10')
-    beware.place(x=800,y=600)
+    
+
 
     for i in appslist:
         if len(i)>len(e):
@@ -311,7 +286,7 @@ def apps():
     back_button.place(x=450, y=20 * (len(appslist) + 3))
 
     global finalwind
-    Finalise=tk.Button(appswind,text='see order',font=('Arial', 12), fg='black', bg='#E16C2E', command=lambda: [appswind.withdraw(), finaliseorder()])
+    Finalise=tk.Button(appswind,text='Finalise order',font=('Arial', 12), fg='black', bg='#E16C2E', command=lambda: [appswind.withdraw(), finaliseorder()])
     Finalise.place(x=300,y=20*(len(appslist)+6))
 
 
@@ -331,9 +306,7 @@ def entrees():
     for i in entreeslist:
         if len(i)>len(e):
             e=i
-    beware=tk.Label(entreewind,text='do check order before finalising',bg='black',fg='white',font='10')
-    beware.place(x=800,y=600)
-      
+        
     for i in entreeslist:
         entry = tk.StringVar()
         entry.set('0')
@@ -393,7 +366,7 @@ def entrees():
     back_button.place(x=450, y=20 * (len(entreeslist) + 3))
 
     global finalwind
-    Finalise=tk.Button(entreewind,text='see order',font=('Arial', 12), fg='black', bg='#E16C2E', command=lambda: [entreewind.withdraw(), finaliseorder()])
+    Finalise=tk.Button(entreewind,text='Finalise order',font=('Arial', 12), fg='black', bg='#E16C2E', command=lambda: [entreewind.withdraw(), finaliseorder()])
     Finalise.place(x=300,y=20*(len(entreeslist)+6))
 
 
@@ -415,9 +388,7 @@ def desserts():
     for i in dessertslist:
         if len(i)>len(e):
             e=i
-    beware=tk.Label(dessertswind,text='do check order before finalising',bg='black',fg='white',font='10')
-    beware.place(x=800,y=600)
-    
+        
 
     for i in dessertslist:
         entry = tk.StringVar()
@@ -478,13 +449,8 @@ def desserts():
     back_button = tk.Button(dessertswind, text="Back to Menu", font=('Arial', 12), fg='black', bg='#E16C2E', command=lambda: [dessertswind.withdraw(), menu()])
     back_button.place(x=450, y=20 * (len(dessertslist) + 3))
     global finalwind
-    Finalise=tk.Button(dessertswind,text='see order',font=('Arial', 12), fg='black', bg='#E16C2E', command=lambda: [dessertswind.withdraw(), finaliseorder()])
+    Finalise=tk.Button(dessertswind,text='Finalise order',font=('Arial', 12), fg='black', bg='#E16C2E', command=lambda: [dessertswind.withdraw(), finaliseorder()])
     Finalise.place(x=300,y=20*(len(dessertslist)+6))
-
-
-
-
-
 
 
 
