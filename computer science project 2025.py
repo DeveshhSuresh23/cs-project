@@ -8,12 +8,16 @@ root.geometry('1500x600')
 root.configure(bg='black')
 s=''
 i=tk.IntVar()
+# a control variable that is something that hold a integer has been created
 i.set(3)
+#i am setting its value to 3
 final=[]
 appsorder=[]
 entreesorder=[]
 dessertsorder=[]
+#***********************
 #sorting if member or not
+#defining functions
 def showmenu():
     if i.get()!=3:
         global wind2
@@ -472,6 +476,7 @@ def desserts():
     global finalwind
     Finalise=tk.Button(dessertswind,text='see order',font=('Arial', 12), fg='black', bg='#E16C2E', command=lambda: [dessertswind.withdraw(), finaliseorder()])
     Finalise.place(x=300,y=20*(len(dessertslist)+6))
+
 
 
 
