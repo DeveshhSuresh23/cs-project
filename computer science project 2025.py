@@ -190,7 +190,7 @@ def finaliseorder():
     global finalwind
     finalwind = tkinter.Toplevel(root)
     finalwind.title('FINAL ORDER')
-    finalwind.geometry('1500x900')
+    finalwind.geometry('800x600')
     finalwind.configure(bg='black')
 
     refresh=tk.Button(finalwind, text='Refresh',font=('Arial', 12), fg='black', bg='#E16C2E', command=lambda:[finalwind.destroy(),finaliseorder()])
@@ -476,6 +476,7 @@ def desserts():
     global finalwind
     Finalise=tk.Button(dessertswind,text='see order',font=('Arial', 12), fg='black', bg='#E16C2E', command=lambda: [dessertswind.withdraw(), finaliseorder()])
     Finalise.place(x=300,y=20*(len(dessertslist)+6))
+
 
 
 
