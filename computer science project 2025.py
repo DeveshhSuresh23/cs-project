@@ -331,7 +331,9 @@ def entrees():
     for i in entreeslist:
         if len(i)>len(e):
             e=i
-        
+    beware=tk.Label(entreewind,text='do check order before finalising',bg='black',fg='white',font='10')
+    beware.place(x=800,y=600)
+      
     for i in entreeslist:
         entry = tk.StringVar()
         entry.set('0')
@@ -413,7 +415,9 @@ def desserts():
     for i in dessertslist:
         if len(i)>len(e):
             e=i
-        
+    beware=tk.Label(dessertswind,text='do check order before finalising',bg='black',fg='white',font='10')
+    beware.place(x=800,y=600)
+    
 
     for i in dessertslist:
         entry = tk.StringVar()
@@ -476,6 +480,7 @@ def desserts():
     global finalwind
     Finalise=tk.Button(dessertswind,text='see order',font=('Arial', 12), fg='black', bg='#E16C2E', command=lambda: [dessertswind.withdraw(), finaliseorder()])
     Finalise.place(x=300,y=20*(len(dessertslist)+6))
+
 
 
 
