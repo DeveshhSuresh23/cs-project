@@ -21,23 +21,46 @@ def showmenu():
     if i.get()==0:
         discount=0
         menu()
-        
     else:
-        wind5=tkinter.Toplevel(root)
-        wind5.title('MENU')
-        wind5.geometry('1500x600')
+        global wind5
+        wind5 = tk.Toplevel(root)
+        wind5.title('Member Verification')
+        wind5.geometry('600x300')  # same compact window as staff
         wind5.configure(bg='black')
-        name=tk.Entry(wind5,width=30,bg='white')
-        name.place(x=50,y=24)
-        namelabel=tk.Label(wind5,text=('name'),fg='white',bg='black')
-        namelabel.place(x=0,y=24)
 
-        passcode=tk.Entry(wind5,width=30,bg='white',show='*')
-        passcode.place(x=50,y=70)
-        passcodelabel=tk.Label(wind5,text=('passcode'),fg='white',bg='black')
-        passcodelabel.place(x=0,y=70)
+        # Name Label and Entry
+        namelabel = tk.Label(wind5, text='Name:', fg='white', bg='black', font=('Arial', 12))
+        namelabel.place(x=50, y=40)
+        name = tk.Entry(wind5, width=30, bg='white', font=('Arial', 12))
+        name.place(x=150, y=40)
 
-        menu()
+        # Passcode Label and Entry
+        passcodelabel = tk.Label(wind5, text='Passcode:', fg='white', bg='black', font=('Arial', 12))
+        passcodelabel.place(x=50, y=90)
+        passcode = tk.Entry(wind5, width=30, bg='white', show='*', font=('Arial', 12))
+        passcode.place(x=150, y=90)
+
+        members = {'a':'1'}
+
+        def check():
+            namegiven = name.get()
+            code = passcode.get()
+            for namegiven in members.keys():
+                if code == members[namegiven]:
+                    result = tk.Label(wind5, text='ACCESS GRANTED', fg='white', bg='black', font=('Arial', 12, 'bold'))
+                    result.place(x=220, y=180)
+                    # keep your original call to menu() if you want it after login
+                    menu()
+                    break
+                else:
+                    result = tk.Label(wind5, text='ACCESS DENIED', fg='white', bg='black', font=('Arial', 12, 'bold'))
+                    result.place(x=220, y=180)
+
+        # Submit Button
+        submit = tk.Button(wind5, text='SUBMIT', font=('Arial', 12, 'bold'),
+                           fg='black', bg='#E16C2E', width=10, height=1, command=check)
+        submit.place(x=250, y=140)
+######################################################################################################################################################################
 
 #what to do if guest    
 def guest():
@@ -61,20 +84,40 @@ def guest():
 #what to do if staff
 def staff():
     root.withdraw()
-    wind6=tk.Tk()
-    wind6.geometry('1500x900')
-    wind6.title('staff verification')
+    wind6 = tk.Tk()
+    wind6.geometry('600x300')  # More compact and centered window
+    wind6.title('Staff Verification')
     wind6.configure(bg='black')
-    name=tk.Entry(wind6,width=30,bg='white')
-    name.place(x=50,y=24)
-    namelabel=tk.Label(wind6,text=('name'),fg='white',bg='black')
-    namelabel.place(x=0,y=24)
 
-    passcode=tk.Entry(wind6,width=30,bg='white',show='*')
-    passcode.place(x=50,y=70)
-    passcodelabel=tk.Label(wind6,text=('passcode'),fg='white',bg='black')
-    passcodelabel.place(x=0,y=70)
-    
+    # Name Label and Entry
+    namelabel = tk.Label(wind6, text='Name:', fg='white', bg='black', font=('Arial', 12))
+    namelabel.place(x=50, y=40)
+    name = tk.Entry(wind6, width=30, bg='white', font=('Arial', 12))
+    name.place(x=150, y=40)
+
+    # Passcode Label and Entry
+    passcodelabel = tk.Label(wind6, text='Passcode:', fg='white', bg='black', font=('Arial', 12))
+    passcodelabel.place(x=50, y=90)
+    passcode = tk.Entry(wind6, width=30, bg='white', show='*', font=('Arial', 12))
+    passcode.place(x=150, y=90)
+
+    employee = {'a': '1'}
+
+    def check():
+        namegiven = name.get()
+        code = passcode.get()
+        for namegiven in employee.keys():
+            if code == employee[namegiven]:
+                result = tk.Label(wind6, text='ACCESS GRANTED', fg='white', bg='black', font=('Arial', 12, 'bold'))
+                result.place(x=220, y=180)
+            else:
+                result = tk.Label(wind6, text='ACCESS DENIED', fg='white', bg='black', font=('Arial', 12, 'bold'))
+                result.place(x=220, y=180)
+
+    # Submit Button
+    submit = tk.Button(wind6, text='SUBMIT', font=('Arial', 12, 'bold'), fg='black', bg='#E16C2E', width=10, height=1, command=check)
+    submit.place(x=250, y=140)
+
 #staff and guest buttons in root
 staff=tk.Button(root,text='click if staff',font=(30),fg='black',bg='#E16C2E',command=staff)
 staff.place(x=50,y=100)
@@ -124,20 +167,51 @@ dessertslist = [
 
 def howto():
     global howwind
-    howwind1=tk.Toplevel(root)
-    howwind1.geometry('1500x900')
+    howwind1 = tk.Toplevel(root)
+    howwind1.geometry('1000x700')  # smaller but comfortably readable window
     howwind1.configure(bg='black')
-    h=tk.Label(howwind1,text="""If you're a member, select "Member" and enter any text for Name and Passcode, then click "Login"; otherwise, choose "Not a member" and click "SUB\n
-MIT" to reach the main "LEXMI NICOS" menu. Here, you can click "Appetizers," "Entrees," or "Desserts" to browse categories. On any category screen, enter the desired quantity (number\n
-) next to each item in the input box (leave as '0' or empty for unwanted items). Crucially, click "Submit" at the top-left to save your selections before navigating to other categor\n
-ies using the "Go to" buttons. You can return to the main menu at any time with "Back to Menu." Once all selections are made, click "Finalise Order" from any category screen to review
-\nyour complete order. If changes are needed, use the "Go to" buttons to return to a category, adjust quantities (remembering to "Submit" again), and then re-finalize your order.\n
-To exit, simply close the main "MENU" window using its 'X' button, which will close all associated windows. For smooth usage, always click "Submit" after entering quantities, \n
-use only whole numbers, and note that this version does not calculate prices.""",font=(25),fg='#E16C2E',bg='black')
-    h.pack()
+    howwind1.title('How to Use the App')
 
-    back=tk.Button(howwind1,text='BACK',font=(50),width=40,bg='#E16C2E',fg='black',command=lambda:[howwind1.destroy(),wind2.deiconify()])
-    back.place(x=500,y=700)
+    instructions = (
+        "📝 HOW TO USE:\n\n"
+        "• If you're a member, select 'Member' and enter any text for Name and Passcode, then click 'Login'.\n"
+        "• If you're not a member, choose 'Not a Member' and click 'SUBMIT' to open the main 'LEXMI NICOS' menu.\n\n"
+        "• On the menu screen, click 'Appetizers', 'Entrees', or 'Desserts' to browse food categories.\n"
+        "• In each category, type the quantity you want next to each item (leave it blank or 0 if you don’t want that item).\n"
+        "• Important: click 'Submit' at the top-left to save your selections before moving to another category.\n\n"
+        "• Use the 'Go to' buttons to navigate between categories.\n"
+        "• Click 'Back to Menu' anytime to return to the main menu.\n"
+        "• Once done, click 'Finalise Order' to review your complete order.\n"
+        "• To make changes, go back using the 'Go to' buttons, edit quantities, click 'Submit' again, and re-finalize your order.\n\n"
+        "• To exit, simply close the main 'MENU' window using the 'X' button.\n\n"
+        "💡 Tips:\n"
+        "  - Always click 'Submit' after entering quantities.\n"
+        "  - Use only whole numbers (no decimals or letters).\n"
+        "  - This version does not calculate prices."
+    )
+
+    h = tk.Label(
+        howwind1,
+        text=instructions,
+        font=('Arial', 14),
+        fg='#E16C2E',
+        bg='black',
+        justify='left',
+        wraplength=950,  # ensures wrapping within the window
+    )
+    h.pack(padx=30, pady=30, anchor='w')
+
+    back = tk.Button(
+        howwind1,
+        text='BACK',
+        font=('Arial', 14, 'bold'),
+        width=25,
+        bg='#E16C2E',
+        fg='black',
+        command=lambda: [howwind1.destroy(), wind2.deiconify()]
+    )
+    back.pack(pady=20)
+
 def menu():
     global wind3
     wind3 = tkinter.Toplevel(root)
