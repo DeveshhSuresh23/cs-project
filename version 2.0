@@ -116,7 +116,7 @@ def staff():
     passcode = tk.Entry(wind6, width=30, bg='white', show='*', font=('Arial', 12))
     passcode.place(x=150, y=90)
 
-    employee = {'a': '1'}  # predefined staff
+    employee = {'a': '1','b':'2','c':'3'}  # predefined staff
 
     # check login credentials
     def check():
