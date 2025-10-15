@@ -59,14 +59,14 @@ def showmenu():
             code = passcode.get()
             a=0
             for i in members.keys():
-                if code == members[namegiven] and i==namegiven:
-                    result = tk.Label(wind5, text='ACCESS GRANTED', fg='white', bg='black', font=('Arial', 12, 'bold'))
-                    result.place(x=220, y=180)
-                    menu()  # open main menu after successful login
-                    break
-                else:
-                    result = tk.Label(wind5, text='ACCESS DENIED', fg='white', bg='black', font=('Arial', 12, 'bold'))
-                    result.place(x=220, y=180)
+                if namegiven in members.keys():
+                    if code == members[namegiven] and i==namegiven:
+                        a=a+1
+            if a==0:
+                result = tk.Label(wind5, text='ACCESS DENIED', fg='white', bg='black', font=('Arial', 12, 'bold'))
+                result.place(x=220, y=180)
+            else:
+                menu()
 
         # Submit button to verify member login
         submit = tk.Button(wind5, text='SUBMIT', font=('Arial', 12, 'bold'),
@@ -125,7 +125,8 @@ def staff():
         code =str(passcode.get())
         a=0
         for i in employee.keys():
-            if code == employee[i] and i==namegiven:
+            if i==namegiven and code == employee[i]:
+#if namegiven not even in employee defenitely the 2nd condition will not be checked so then no error
                 a+=1
         if a==0:
             result = tk.Label(wind6, text='ACCESS DENIED', fg='white', bg='black', font=('Arial', 12, 'bold'))
