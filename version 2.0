@@ -122,11 +122,12 @@ def staff():
     def check():
         namegiven = str(name.get())
         code =str(passcode.get())
-        for namegiven in employee.keys():
-            if code == employee[namegiven]:
+        a=0
+        for i in employee.keys():
+            if code == employee[i] and i==namegiven:
                 result = tk.Label(wind6, text='ACCESS GRANTED', fg='white', bg='black', font=('Arial', 12, 'bold'))
                 result.place(x=220, y=180)
-            else:
+            if a=0:
                 result = tk.Label(wind6, text='ACCESS DENIED', fg='white', bg='black', font=('Arial', 12, 'bold'))
                 result.place(x=220, y=180)
 
