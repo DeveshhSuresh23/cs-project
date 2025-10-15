@@ -120,8 +120,8 @@ def staff():
 
     # check login credentials
     def check():
-        namegiven = name.get()
-        code = passcode.get()
+        namegiven = str(name.get())
+        code =str(passcode.get())
         for namegiven in employee.keys():
             if code == employee[namegiven]:
                 result = tk.Label(wind6, text='ACCESS GRANTED', fg='white', bg='black', font=('Arial', 12, 'bold'))
