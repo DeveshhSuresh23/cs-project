@@ -57,8 +57,9 @@ def showmenu():
         def check():
             namegiven = name.get()
             code = passcode.get()
-            for namegiven in members.keys():
-                if code == members[namegiven]:
+            a=0
+            for i in members.keys():
+                if code == members[namegiven] and i==namegiven:
                     result = tk.Label(wind5, text='ACCESS GRANTED', fg='white', bg='black', font=('Arial', 12, 'bold'))
                     result.place(x=220, y=180)
                     menu()  # open main menu after successful login
@@ -125,11 +126,13 @@ def staff():
         a=0
         for i in employee.keys():
             if code == employee[i] and i==namegiven:
-                result = tk.Label(wind6, text='ACCESS GRANTED', fg='white', bg='black', font=('Arial', 12, 'bold'))
-                result.place(x=220, y=180)
-            if a=0:
-                result = tk.Label(wind6, text='ACCESS DENIED', fg='white', bg='black', font=('Arial', 12, 'bold'))
-                result.place(x=220, y=180)
+                a+=1
+        if a==0:
+            result = tk.Label(wind6, text='ACCESS DENIED', fg='white', bg='black', font=('Arial', 12, 'bold'))
+            result.place(x=220, y=180)
+        else:
+            result = tk.Label(wind6, text='ACCESS GRANTED', fg='white', bg='black', font=('Arial', 12, 'bold'))
+            result.place(x=220, y=180)
 
     # Submit button to verify staff login
     submit = tk.Button(wind6, text='SUBMIT', font=('Arial', 12, 'bold'), fg='black', bg='#E16C2E', width=10, height=1, command=check)
