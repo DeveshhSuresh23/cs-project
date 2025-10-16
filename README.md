@@ -1,1 +1,1 @@
-project made with my bodily fluids(blood sweat and tears
+project made with my blood sweat and tears
