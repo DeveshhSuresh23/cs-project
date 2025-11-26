@@ -1,0 +1,28 @@
+
+CREATE DATABASE lexminicos;
+
+-- Select the database to work in
+USE lexminicos;
+
+-- Create the Staff table
+CREATE TABLE staff (name VARCHAR(50), password VARCHAR(50));
+
+-- Create the Members table
+CREATE TABLE members(name VARCHAR(50) NOT NULL PRIMARY KEY, password VARCHAR(50));
+
+-- --- STAFF ACCOUNTS ---
+INSERT INTO staff VALUES ('DEVESHH', '1');
+INSERT INTO staff VALUES ('PARTHIBAN', '2');
+INSERT INTO staff VALUES ('PETER PARKER', '3');
+INSERT INTO staff VALUES ('GORDON RAMSAY', '4');
+
+-- --- MEMBER ACCOUNTS ---
+-- Note: 'DEVESHH' uses '1' for the shared login
+INSERT INTO members VALUES ('DEVESHH', '1');
+INSERT INTO members VALUES ('LORD SHIVA', '5');
+INSERT INTO members VALUES ('KARNAN', '6');
+INSERT INTO members VALUES ('JAMES BOND', '7');
+INSERT INTO members VALUES ('TCHALLA', '8');
+INSERT INTO members VALUES ('NAMOR', '9');
+INSERT INTO members VALUES ('TONY STARK', '10');
+INSERT INTO members VALUES ('BRUCE WAYNE', '11');
