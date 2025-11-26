@@ -1,5 +1,5 @@
 import tkinter
-
+import mysql.connector
 tk = tkinter
 
 mycon = mysql.connector.connect(host="localhost", user="root", password="Suresh23", database="lexminicos")
@@ -9,6 +9,18 @@ import mysql.connector
 #-----------MYSQL-------------------
 mycon = mysql.connector.connect(host="localhost", user="root",password="Suresh23",database="lexminicos" )
 cursor = mycon.cursor()
+
+def fetch_members():
+    """Fetches member name and password from the 'members' table and returns them as a dictionary."""
+    cursor.execute("SELECT name, password FROM members")
+    member_data = dict(cursor.fetchall())
+    return member_data
+
+def fetch_staff():
+    """Fetches staff name and password from the 'staff' table and returns them as a dictionary."""
+    cursor.execute("SELECT name, password FROM staff")
+    staff_data = dict(cursor.fetchall())
+    return staff_data
 # ---------- MAIN WINDOW ----------
 
 #BLOCK 1 CRETE THE HOMEEPAGE OR STARTING PAGE,    BLOCK 2 SHOWS MENU     BLOCK 3 ASKS IF MEMBER OR NOT    BLOCK 4 IS IF STAFF
@@ -58,7 +70,7 @@ def showmenu():
         passcode = tk.Entry(wind5, width=30, bg='white', show='*', font=('Arial', 12))
         passcode.place(x=150, y=90)
 
-        members = {'a':'1'}  # predefined members for demo
+        members = fetch_members() # Fetches data from MySQL
 
         # check login credentials
         def check():
@@ -124,8 +136,9 @@ def staff():
     passcode = tk.Entry(wind6, width=30, bg='white', show='*', font=('Arial', 12))
     passcode.place(x=150, y=90)
 
-    employee = {'a': '1','b':'2','c':'3'}  # predefined staff
+    employee = fetch_staff() # uses my sql
 
+    
     # check login credentials
     def check():
         namegiven = str(name.get())
@@ -538,7 +551,7 @@ def desserts():
 
 # ---------- RUN THE APP ----------
 root.mainloop()
-
+mycon.close()
 '''The provided Python code constructs a functional multi-window ordering system for a fictional restaurant, "LEXMI NICOS," utilizing the Tkinter library to manage the graphical user interface. While the application's visual style is admittedly basic due to its reliance on standard Tkinter widgets and absolute positioning (.place), its strength lies in its meticulously organized functional architecture, which ensures a logical, stateful progression from user identification to order finalization. The entire system is held together by a network of global variables that synchronize data across disparate windows, making the complex process of building a multi-category order seamless for the user.
 
 The initial phase of the application focuses on authentication and flow control. The primary root window presents two distinct pathways: Staff or Guest. The staff() function simulates a simple login check against a hardcoded credential set, although its workflow terminates after access is granted or denied. The Guest path, initiated by guest(), immediately prompts the user to declare their membership status, setting the value of the critical global integer variable i (where 1 signifies a member and 0 a non-member). This choice determines the next step: the showmenu() function either sends a non-member directly to the main menu or opens a Member Verification window for members, demanding a passcode check before granting access to the ordering system.
